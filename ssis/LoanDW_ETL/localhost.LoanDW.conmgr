@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="localhost.LoanDW"
+  DTS:DTSID="{4F510697-738B-485D-A373-830E06E5F252}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;Initial Catalog=LoanDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Trust Server Certificate=True;Application Name=SSIS-LoanDW_ETL-{4F510697-738B-485D-A373-830E06E5F252}localhost.LoanDW;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

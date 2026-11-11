@@ -1,0 +1,1765 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2026 7:20:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HISHAM"
+  DTS:CreatorName="HISHAM\audip"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{A2612961-8AEE-4CB1-AE63-695FB7EEE756}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stage_Payments"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{BEC1BB85-8A66-4379-A930-9ABA802F844B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ArchiveFolder]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{50BF2FF8-0998-4E36-9E5A-A9A8B1836656}"
+      DTS:ObjectName="ArchiveFolder">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\Project\loan-data-warehouse\data\archive" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PaymentFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{0023E268-10A2-4C29-844D-E39AB76ECAEF}"
+      DTS:ObjectName="PaymentFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Project\loan-data-warehouse\data\incoming\payments_202301.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="payment_id"
+              DTS:DTSID="{0D0C5D82-2886-4377-9352-4C9A9D4BC878}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="loan_id"
+              DTS:DTSID="{4DA4C113-1CE0-4F5B-81BB-2917884489ED}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="installment_no"
+              DTS:DTSID="{AF6D0266-48A0-4A22-860C-29A77D59E37A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="payment_date"
+              DTS:DTSID="{E81998E2-2693-40CA-BA6B-7FA91380B43F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="amount"
+              DTS:DTSID="{76A8D6B5-77C4-4D0E-868A-0D030BA121C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="channel"
+              DTS:DTSID="{571732B0-3CC0-4542-AA3A-708F61C6D13E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{48FACA9D-0F43-4BC4-B18A-F1CD1DB1CAE1}"
+      DTS:ObjectName="BatchId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A9DA03DD-8754-4E3C-AA64-DAF53621B699}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="TOKEN(@[User::FilePath], &quot;\\&quot;, TOKENCOUNT(@[User::FilePath], &quot;\\&quot;))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">payments_202301.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5279B1A-A145-4F30-BD55-8BDD5FE14F8B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Project\loan-data-warehouse\data\incoming\payments_202301.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7C24A3F0-DD6A-4947-87DB-C6BD7C51E530}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="IsProcessed">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63D3DC9A-E353-4010-A038-41519CBA1B85}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FELC - Payment files"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{53A50BD3-BE5F-485B-9528-BE3A1CCF5188}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FELC - Payment files">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{404682A9-F4D5-4A4E-A4E9-8C5848431F42}"
+        DTS:ObjectName="{404682A9-F4D5-4A4E-A4E9-8C5848431F42}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Project\loan-data-warehouse\data\incoming" />
+            <FEFEProperty
+              FileSpec="payments_*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Payment files\DFT - Load payment file"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{5AECAD81-3CC4-4055-97D5-71B18D97C492}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT - Load payment file"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="CNT - Rows rea">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="DCN - Convert types"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input].Columns[installment_no]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="installment_no"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[installment_no]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input].Columns[payment_date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="payment_date"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_date]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input].Columns[amount]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="amount"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[amount]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input].Columns[channel]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="channel"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[channel]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[installment_no_int]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="RedirectRow"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[installment_no_int]"
+                          name="installment_no_int"
+                          truncationRowDisposition="RedirectRow">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[installment_no]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[payment_date_dt]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="RedirectRow"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[payment_date_dt]"
+                          name="payment_date_dt"
+                          truncationRowDisposition="RedirectRow">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_date]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[amount_num]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="RedirectRow"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[amount_num]"
+                          name="amount_num"
+                          precision="18"
+                          truncationRowDisposition="RedirectRow">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[amount]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[channel_w]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="RedirectRow"
+                          length="30"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[channel_w]"
+                          name="channel_w"
+                          truncationRowDisposition="RedirectRow">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[channel]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="DER - Add source_file"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output].Columns[source_file]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="260"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output].Columns[source_file]"
+                          name="source_file"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_WSTR,260)@[User::FileName]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_WSTR,260)@[User::FileName]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="DER - Reject reason"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[reject_reason]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[reject_reason]"
+                          name="reject_reason"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_WSTR,200)"Data conversion failed"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_WSTR,200)"Data conversion failed"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[batch_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[batch_id]"
+                          name="batch_id"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[$Package::BatchId]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[$Package::BatchId]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DST - payment_reject"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[etl].[payment_reject]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Connections[OleDbConnection]"
+                      connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[payment_id]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="payment_id"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_id]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[loan_id]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="loan_id"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[loan_id]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[installment_no]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="installment_no"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[installment_no]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[payment_date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="payment_date"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_date]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[amount]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="amount"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[amount]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[channel]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="channel"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[channel]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[source_file]"
+                          cachedDataType="wstr"
+                          cachedLength="260"
+                          cachedName="source_file"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output].Columns[source_file]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[reject_reason]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="reject_reason"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_reason]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[reject_reason]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[batch_id]"
+                          cachedDataType="i4"
+                          cachedName="batch_id"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output].Columns[batch_id]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_id]"
+                          dataType="i4"
+                          name="reject_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="payment_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="loan_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="installment_no" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="payment_date" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="amount" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="channel" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                          dataType="wstr"
+                          length="260"
+                          name="source_file" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_reason]"
+                          dataType="wstr"
+                          length="200"
+                          name="reject_reason" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                          dataType="i4"
+                          name="batch_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[rejected_at]"
+                          dataType="dbTimeStamp2"
+                          name="rejected_at" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DST - stg payment"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[stg].[payment]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Connections[OleDbConnection]"
+                      connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[payment_id]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="payment_id"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_id]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[loan_id]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="loan_id"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[loan_id]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[source_file]"
+                          cachedDataType="wstr"
+                          cachedLength="260"
+                          cachedName="source_file"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output].Columns[source_file]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[payment_date_dt]"
+                          cachedDataType="dbDate"
+                          cachedName="payment_date_dt"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[payment_date_dt]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[installment_no_int]"
+                          cachedDataType="i4"
+                          cachedName="installment_no_int"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[installment_no_int]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[amount_num]"
+                          cachedDataType="numeric"
+                          cachedName="amount_num"
+                          cachedPrecision="18"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[amount_num]" />
+                        <inputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].Columns[channel_w]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="channel_w"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output].Columns[channel_w]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="payment_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="12"
+                          name="loan_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                          dataType="i4"
+                          name="installment_no" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                          dataType="dbDate"
+                          name="payment_date" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          dataType="numeric"
+                          name="amount"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                          dataType="wstr"
+                          length="30"
+                          name="channel" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                          dataType="wstr"
+                          length="260"
+                          name="source_file" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input].ExternalColumns[loaded_at]"
+                          dataType="dbTimeStamp2"
+                          name="loaded_at" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="FF_SRC - Payment file"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[PaymentFile]"
+                      connectionManagerRefId="Package.ConnectionManagers[PaymentFile]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_id]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[payment_id]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_id]"
+                          name="payment_id"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[loan_id]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[loan_id]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[loan_id]"
+                          name="loan_id"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[installment_no]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[installment_no]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[installment_no]"
+                          name="installment_no"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_date]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[payment_date]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[payment_date]"
+                          name="payment_date"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[amount]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[amount]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[amount]"
+                          name="amount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[channel]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[channel]"
+                          length="50"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].Columns[channel]"
+                          name="channel"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[payment_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="payment_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[loan_id]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="loan_id" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[installment_no]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="installment_no" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[payment_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="payment_date" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[amount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="amount" />
+                        <externalMetadataColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output].ExternalColumns[channel]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="channel" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Data Conversion Error Output]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Inputs[Derived Column Input]"
+                  name="Data Conversion Error Output"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Error Output]" />
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Data Conversion Output]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Derived Column Output]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types.Inputs[Data Conversion Input]"
+                  name="Derived Column Output"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Derived Column Output1]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Flat File Source Output]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea.Inputs[Row Count Input 1]"
+                  name="Flat File Source Output"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file.Outputs[Flat File Source Output]" />
+                <path
+                  refId="Package\FELC - Payment files\DFT - Load payment file.Paths[Row Count Output 1]"
+                  endId="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file.Inputs[Derived Column Input]"
+                  name="Row Count Output 1"
+                  startId="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Payment files\File System Task"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{5BE9790D-3B69-4A6B-AD93-10DEB4CE8D35}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::FilePath"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="ArchiveFolder" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Payment files\SQL - Check file_log"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7A9D2313-D467-4237-BBDC-40BE529F35E4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Check file_log"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+              SQLTask:SqlStatementSource="SELECT COUNT(*) AS is_processed FROM etl.file_log WHERE file_name = ?;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="is_processed"
+                SQLTask:DtsVariableName="User::IsProcessed" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="260" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Payment files\SQL - Log file"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F63D0524-37D6-402A-8874-F4768CD331C7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL - Log file"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+              SQLTask:SqlStatementSource="INSERT INTO etl.file_log (file_name, row_count, batch_id) VALUES (?, ?, ?);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="260" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::RowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Package::BatchId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Payment files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{C88CFC6B-9812-4FDC-B57B-28DE46FA063D}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::IsProcessed] == 0"
+          DTS:From="Package\FELC - Payment files\SQL - Check file_log"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FELC - Payment files\DFT - Load payment file" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Payment files.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{2AA442F9-0E04-4F27-AA25-3D936E813887}"
+          DTS:From="Package\FELC - Payment files\DFT - Load payment file"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FELC - Payment files\SQL - Log file" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Payment files.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{B4CE601A-C289-4838-9181-ABB16F307DBA}"
+          DTS:From="Package\FELC - Payment files\SQL - Log file"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\FELC - Payment files\File System Task" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{7DDA388D-1659-4DF1-961C-C311BD1390AF}"
+          DTS:ObjectName="{7DDA388D-1659-4DF1-961C-C311BD1390AF}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FilePath" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate stg payment"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6C859C03-F3FE-453F-A79B-3B4139AEE14E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate stg payment"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE stg.payment;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{04BCA72D-55A2-4B27-937D-8B0243D8CC50}"
+      DTS:From="Package\SQL - Truncate stg payment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\FELC - Payment files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\SQL - Truncate stg payment"
+          TopLeft="311.666649637952,58.9333329235183" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\FELC - Payment files\SQL - Check file_log"
+          TopLeft="81.0333122523304,20.1999986078343" />
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file"
+          TopLeft="71.8666460865082,99.0666647260719" />
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\FELC - Payment files\SQL - Log file"
+          TopLeft="89.3666451303504,190.39999768575" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\FELC - Payment files\File System Task"
+          TopLeft="86.0333119791423,273.466663858228" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files.PrecedenceConstraints[Constraint]"
+          TopLeft="167.249979169419,61.7999986078343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.2666661182376"
+              Start="0,0"
+              End="0,29.7666661182376">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.7666661182376" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,6.88333305911881,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Payment files.PrecedenceConstraints[Constraint 1]"
+          TopLeft="163.416645608429,140.666664726072">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.7333329596784"
+              Start="0,0"
+              End="0,42.2333329596784">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.2333329596784" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Payment files.PrecedenceConstraints[Constraint 2]"
+          TopLeft="162.699978554746,231.99999768575">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.4666661724781"
+              Start="0,0"
+              End="0,33.9666661724781">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.9666661724781" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="316.8,370.4"
+          Size="316.8,413.6"
+          Id="Package\FELC - Payment files"
+          TopLeft="304.999983335536,136.933332381116" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="416.066649637952,100.533332923518">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.3333336975841,36.3999994575978"
+              Start="0,0"
+              End="47.3333336975841,28.8999994575978">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1999997287989" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.1999997287989"
+                    Point2="0,18.1999997287989"
+                    Point3="4,18.1999997287989" />
+                  <mssgle:LineSegment
+                    End="43.3333336975841,18.1999997287989" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.3333336975841,18.1999997287989"
+                    Point2="47.3333336975841,18.1999997287989"
+                    Point3="47.3333336975841,22.1999997287989" />
+                  <mssgle:LineSegment
+                    End="47.3333336975841,28.8999994575978" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FELC - Payment files\DFT - Load payment file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\FF_SRC - Payment file"
+          TopLeft="455.999993205071,100.999998494983" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\CNT - Rows rea"
+          TopLeft="470.999992981553,190.999997153878" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Flat File Source Output]"
+          TopLeft="547.899993093312,142.599998494983">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.3999986588955"
+              Start="0,0"
+              End="0,40.8999986588955">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.8999986588955" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\DER - Add source_file"
+          TopLeft="456.999993190169,279.999995827675" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Row Count Output 1]"
+          TopLeft="547.399993085861,232.599997153878">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.3999986737965"
+              Start="0,0"
+              End="0,39.8999986737965">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.8999986737965" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\DCN - Convert types"
+          TopLeft="461.999993115663,364.999994561076" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Derived Column Output]"
+          TopLeft="548.099993152916,321.599995827675">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.3999987334014"
+              Start="0,0"
+              End="0,35.8999987334014">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.8999987334014" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment"
+          TopLeft="300.99999551475,468.999993011355" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Data Conversion Output]"
+          TopLeft="521.199993115663,406.599994561076">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-137.799997600913,62.3999984502791"
+              Start="0,0"
+              End="-137.799997600913,54.8999984502791">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3019171798392" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.3019171798392"
+                    Point2="0,25.3019171798392"
+                    Point3="-4,25.3019171798392" />
+                  <mssgle:LineSegment
+                    End="-133.799997600913,25.3019171798392" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-133.799997600913,25.3019171798392"
+                    Point2="-137.799997600913,25.3019171798392"
+                    Point3="-137.799997600913,29.3019171798392" />
+                  <mssgle:LineSegment
+                    End="-137.799997600913,54.8999984502791" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\DER - Reject reason"
+          TopLeft="621.999990731478,468.399994128943" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Data Conversion Error Output]"
+          TopLeft="576.399993115664,406.599994561076">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132.399997615814,61.7999995678664"
+              Start="0,0"
+              End="132.399997615814,54.2999995678664">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.058629961765" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.058629961765"
+                    Point2="0,25.058629961765"
+                    Point3="4,25.058629961765" />
+                  <mssgle:LineSegment
+                    End="128.399997615814,25.058629961765" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.399997615814,25.058629961765"
+                    Point2="132.399997615814,25.058629961765"
+                    Point3="132.399997615814,29.058629961765" />
+                  <mssgle:LineSegment
+                    End="132.399997615814,54.2999995678664" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0.113612089157158,30.058629961765,132.1727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject"
+          TopLeft="618.999990776181,557.599993085861" />
+        <EdgeLayout
+          Id="Package\FELC - Payment files\DFT - Load payment file.Paths[Derived Column Output1]"
+          TopLeft="708.699990753829,509.999994128943">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.5999989569187"
+              Start="0,0"
+              End="0,40.0999989569187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.0999989569187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FELC - Payment files\DFT - Load payment file\DST - stg payment">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FELC - Payment files\DFT - Load payment file\DST - payment_reject">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

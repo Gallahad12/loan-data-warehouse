@@ -1,0 +1,54 @@
+// DAX measures for LoanDW_Dashboard.pbix.
+// Snapshot measures use the latest month end in the current filter, so a card with no
+// month filter shows the latest month and a chart by month shows each month.
+
+// ---------------------------------------------------------------- portfolio (fact_loan_monthly_snapshot)
+Outstanding =
+VAR k = MAX ( fact_loan_monthly_snapshot[snapshot_date_key] )
+RETURN
+    CALCULATE (
+        SUM ( fact_loan_monthly_snapshot[outstanding_principal] ),
+        fact_loan_monthly_snapshot[snapshot_date_key] = k
+    )
+
+NPL Outstanding =
+VAR k = MAX ( fact_loan_monthly_snapshot[snapshot_date_key] )
+RETURN
+    CALCULATE (
+        SUM ( fact_loan_monthly_snapshot[outstanding_principal] ),
+        fact_loan_monthly_snapshot[snapshot_date_key] = k,
+        fact_loan_monthly_snapshot[is_npl] = TRUE ()
+    )
+
+NPL % = DIVIDE ( [NPL Outstanding], [Outstanding] )
+
+Active Loans =
+VAR k = MAX ( fact_loan_monthly_snapshot[snapshot_date_key] )
+RETURN
+    CALCULATE (
+        COUNTROWS ( fact_loan_monthly_snapshot ),
+        fact_loan_monthly_snapshot[snapshot_date_key] = k
+    )
+
+// ---------------------------------------------------------------- payments (fact_payment)
+Total Collected = SUM ( fact_payment[amount] )
+
+Payment Count = COUNTROWS ( fact_payment )
+
+On-time % =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( fact_payment ), fact_payment[days_late] <= 0 ),
+    [Payment Count]
+)
+
+Avg Days Late = AVERAGE ( fact_payment[days_late] )
+
+// ---------------------------------------------------------------- card labels
+// The new card visual shortens numbers (4.9K) whatever the format string says.
+// Text measures show the full count.
+Active Loans Label = FORMAT ( [Active Loans], "#,0" )
+
+Payment Count Label = FORMAT ( [Payment Count], "#,0" )
+
+// ---------------------------------------------------------------- disbursement (fact_loan)
+Total Disbursed = SUM ( fact_loan[principal_amount] )

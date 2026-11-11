@@ -1,0 +1,2383 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2026 5:01:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HISHAM"
+  DTS:CreatorName="HISHAM\audip"
+  DTS:DTSID="{BEA684D6-3B7B-4B3A-8990-7BE555400173}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stage_LoanCore"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{9186E279-99D8-4C4F-9925-95C97E3C3314}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED7B34C1-1652-4644-A82F-D0790158A6C8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WM_Branch">
+      <DTS:VariableValue
+        DTS:DataType="7">11/10/2026 5:18:03 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{389EA229-AD33-413F-AE1E-E707C7423EB8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WM_Customer">
+      <DTS:VariableValue
+        DTS:DataType="7">11/10/2026 5:18:39 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{857B4EBE-629B-4B9B-9BF8-E717AC651E96}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WM_Loan">
+      <DTS:VariableValue
+        DTS:DataType="7">11/10/2026 5:19:13 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B5AA0953-FBA8-448C-8385-DCE089612AEA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WM_Product">
+      <DTS:VariableValue
+        DTS:DataType="7">11/10/2026 5:18:09 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Stage LoanCore"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{260990AC-3790-4151-9CDD-01064C717FFC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Stage LoanCore"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Stage LoanCore\DST - stg branch"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stg branch"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[branch]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\DST - stg branch.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[branch_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="branch_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[branch_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[branch_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="branch_name"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[branch_name]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_name]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[province]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="province"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[province]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[province]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[region]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="region"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[region]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[region]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[opened_date]"
+                      cachedDataType="dbDate"
+                      cachedName="opened_date"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[opened_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[opened_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="branch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[branch_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="branch_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[province]"
+                      dataType="wstr"
+                      length="50"
+                      name="province" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[region]"
+                      dataType="wstr"
+                      length="50"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[opened_date]"
+                      dataType="dbDate"
+                      name="opened_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\DST - stg branch.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg branch.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg branch.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg branch.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\DST - stg customer"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stg customer"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\DST - stg customer.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[full_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="full_name"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[full_name]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[full_name]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="gender"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[gender]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[gender]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[birth_date]"
+                      cachedDataType="dbDate"
+                      cachedName="birth_date"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[birth_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[birth_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[occupation]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="occupation"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[occupation]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[occupation]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[monthly_income]"
+                      cachedDataType="numeric"
+                      cachedName="monthly_income"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[monthly_income]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[monthly_income]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[province]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="province"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[province]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[province]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[full_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="full_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="gender" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[birth_date]"
+                      dataType="dbDate"
+                      name="birth_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[occupation]"
+                      dataType="wstr"
+                      length="50"
+                      name="occupation" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[monthly_income]"
+                      dataType="numeric"
+                      name="monthly_income"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[province]"
+                      dataType="wstr"
+                      length="50"
+                      name="province" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp2"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\DST - stg customer.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg customer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg customer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg customer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\DST - stg product"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stg product"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\DST - stg product.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].Columns[product_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="product_name"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[product_name]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_name]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="category"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[category]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].Columns[interest_rate_flat]"
+                      cachedDataType="numeric"
+                      cachedName="interest_rate_flat"
+                      cachedPrecision="5"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[interest_rate_flat]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[interest_rate_flat]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[product_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="product_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="50"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[interest_rate_flat]"
+                      dataType="numeric"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\DST - stg product.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg product.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\DST - stg product.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\DST - stg product.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[loan]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[loan_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="loan_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[loan_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[branch_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="branch_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[branch_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[branch_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[application_date]"
+                      cachedDataType="dbDate"
+                      cachedName="application_date"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[application_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[application_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[disbursement_date]"
+                      cachedDataType="dbDate"
+                      cachedName="disbursement_date"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[disbursement_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[disbursement_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[principal_amount]"
+                      cachedDataType="numeric"
+                      cachedName="principal_amount"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[principal_amount]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[principal_amount]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[interest_rate_flat]"
+                      cachedDataType="numeric"
+                      cachedName="interest_rate_flat"
+                      cachedPrecision="5"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[interest_rate_flat]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[interest_rate_flat]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[tenor_months]"
+                      cachedDataType="i4"
+                      cachedName="tenor_months"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tenor_months]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[tenor_months]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[installment_amount]"
+                      cachedDataType="numeric"
+                      cachedName="installment_amount"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[installment_amount]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[installment_amount]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="loan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="branch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[application_date]"
+                      dataType="dbDate"
+                      name="application_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[disbursement_date]"
+                      dataType="dbDate"
+                      name="disbursement_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[principal_amount]"
+                      dataType="numeric"
+                      name="principal_amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[interest_rate_flat]"
+                      dataType="numeric"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tenor_months]"
+                      dataType="i4"
+                      name="tenor_months" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[installment_amount]"
+                      dataType="numeric"
+                      name="installment_amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp2"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\SRC - branch"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - branch"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT branch_id, branch_name, city, province, region, opened_date, updated_at FROM dbo.branch WHERE updated_at &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{ED7B34C1-1652-4644-A82F-D0790158A6C8};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\SRC - branch.Connections[OleDbConnection]"
+                  connectionManagerID="{8DDCE621-10F0-4CB5-8827-851E87C988DF}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanCore]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[branch_id]"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_id]"
+                      name="branch_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[branch_name]"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[branch_name]"
+                      name="branch_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[province]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[province]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[province]"
+                      name="province"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[region]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[region]"
+                      name="region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[opened_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[opened_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[opened_date]"
+                      name="opened_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="branch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[branch_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="branch_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[province]"
+                      dataType="wstr"
+                      length="50"
+                      name="province" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      dataType="wstr"
+                      length="50"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[opened_date]"
+                      dataType="dbDate"
+                      name="opened_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[branch_id]"
+                      name="branch_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[branch_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[branch_name]"
+                      name="branch_name" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[city]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[province]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[province]"
+                      name="province" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[region]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[region]"
+                      name="region" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[opened_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[opened_date]"
+                      name="opened_date" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\SRC - customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT customer_id, full_name, gender, birth_date, occupation, monthly_income,
+       city, province, created_at, updated_at
+FROM dbo.customer
+WHERE updated_at &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{389EA229-AD33-413F-AE1E-E707C7423EB8};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\SRC - customer.Connections[OleDbConnection]"
+                  connectionManagerID="{8DDCE621-10F0-4CB5-8827-851E87C988DF}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanCore]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[full_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[full_name]"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[full_name]"
+                      name="full_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      length="1"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[gender]"
+                      name="gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[birth_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[birth_date]"
+                      name="birth_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[occupation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[occupation]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[occupation]"
+                      name="occupation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[monthly_income]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[monthly_income]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[monthly_income]"
+                      name="monthly_income"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[province]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[province]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[province]"
+                      name="province"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[full_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="full_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="gender" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[birth_date]"
+                      dataType="dbDate"
+                      name="birth_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[occupation]"
+                      dataType="wstr"
+                      length="50"
+                      name="occupation" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[monthly_income]"
+                      dataType="numeric"
+                      name="monthly_income"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[province]"
+                      dataType="wstr"
+                      length="50"
+                      name="province" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp2"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[full_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[full_name]"
+                      name="full_name" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      name="gender" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[birth_date]"
+                      name="birth_date" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[occupation]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[occupation]"
+                      name="occupation" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[monthly_income]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[monthly_income]"
+                      name="monthly_income"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[city]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[province]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[province]"
+                      name="province" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\SRC - loan"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - loan"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT loan_id, customer_id, branch_id, product_id, application_date, disbursement_date, principal_amount, interest_rate_flat, tenor_months, installment_amount, created_at, updated_at FROM dbo.loan WHERE updated_at &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{857B4EBE-629B-4B9B-9BF8-E717AC651E96};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\SRC - loan.Connections[OleDbConnection]"
+                  connectionManagerID="{8DDCE621-10F0-4CB5-8827-851E87C988DF}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanCore]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[loan_id]"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[loan_id]"
+                      name="loan_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[branch_id]"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[branch_id]"
+                      name="branch_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[application_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[application_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[application_date]"
+                      name="application_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[disbursement_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[disbursement_date]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[disbursement_date]"
+                      name="disbursement_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[principal_amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[principal_amount]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[principal_amount]"
+                      name="principal_amount"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[interest_rate_flat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[interest_rate_flat]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[interest_rate_flat]"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[tenor_months]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[tenor_months]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[tenor_months]"
+                      name="tenor_months"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[installment_amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[installment_amount]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[installment_amount]"
+                      name="installment_amount"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="loan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="branch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[application_date]"
+                      dataType="dbDate"
+                      name="application_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[disbursement_date]"
+                      dataType="dbDate"
+                      name="disbursement_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[principal_amount]"
+                      dataType="numeric"
+                      name="principal_amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[interest_rate_flat]"
+                      dataType="numeric"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[tenor_months]"
+                      dataType="i4"
+                      name="tenor_months" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[installment_amount]"
+                      dataType="numeric"
+                      name="installment_amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp2"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[loan_id]"
+                      name="loan_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[branch_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[branch_id]"
+                      name="branch_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[application_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[application_date]"
+                      name="application_date" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[disbursement_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[disbursement_date]"
+                      name="disbursement_date" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[principal_amount]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[principal_amount]"
+                      name="principal_amount"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[interest_rate_flat]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[interest_rate_flat]"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[tenor_months]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[tenor_months]"
+                      name="tenor_months" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[installment_amount]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[installment_amount]"
+                      name="installment_amount"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Stage LoanCore\SRC - product"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - product"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT product_id, product_name, category, interest_rate_flat, updated_at FROM dbo.product WHERE updated_at &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{B5AA0953-FBA8-448C-8385-DCE089612AEA};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Stage LoanCore\SRC - product.Connections[OleDbConnection]"
+                  connectionManagerID="{8DDCE621-10F0-4CB5-8827-851E87C988DF}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanCore]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[product_name]"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[product_name]"
+                      name="product_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[category]"
+                      name="category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[interest_rate_flat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[interest_rate_flat]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[interest_rate_flat]"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[product_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="product_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="50"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[interest_rate_flat]"
+                      dataType="numeric"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      name="updated_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[product_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[product_name]"
+                      name="product_name" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[category]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[category]"
+                      name="category" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[interest_rate_flat]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[interest_rate_flat]"
+                      name="interest_rate_flat"
+                      precision="5"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Stage LoanCore\DST - stg customer.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Stage LoanCore\SRC - customer.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output1]"
+              endId="Package\DFT - Stage LoanCore\DST - stg branch.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Stage LoanCore\SRC - branch.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output2]"
+              endId="Package\DFT - Stage LoanCore\DST - stg product.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Stage LoanCore\SRC - product.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output3]"
+              endId="Package\DFT - Stage LoanCore\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Stage LoanCore\SRC - loan.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Get watermarks"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{53A3C2D3-7C4E-4A5D-8704-F54C1A2C3B93}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Get watermarks"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="SELECT&#xA;    MAX(CASE WHEN table_name = 'branch'   THEN last_updated_at END) AS wm_branch,&#xA;    MAX(CASE WHEN table_name = 'product'  THEN last_updated_at END) AS wm_product,&#xA;    MAX(CASE WHEN table_name = 'customer' THEN last_updated_at END) AS wm_customer,&#xA;    MAX(CASE WHEN table_name = 'loan'     THEN last_updated_at END) AS wm_loan&#xA;FROM etl.watermark;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="wm_branch"
+            SQLTask:DtsVariableName="User::WM_Branch" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="wm_product"
+            SQLTask:DtsVariableName="User::WM_Product" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="wm_customer"
+            SQLTask:DtsVariableName="User::WM_Customer" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="wm_loan"
+            SQLTask:DtsVariableName="User::WM_Loan" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B72BC985-05CB-49AA-9FF0-EDE15487C882}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE stg.branch;&#xA;TRUNCATE TABLE stg.product;&#xA;TRUNCATE TABLE stg.customer;&#xA;TRUNCATE TABLE stg.loan;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Update watermarks"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2CCE03B7-2427-494C-B4F1-82471AF866CD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Update watermarks"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="EXEC etl.usp_update_watermarks;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E0891B4-348E-46DD-8922-6BDAC70AB6F9}"
+      DTS:From="Package\SQL - Get watermarks"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SQL - Truncate staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1CE681BC-BB93-4DE3-BE42-6072585D138A}"
+      DTS:From="Package\SQL - Truncate staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DFT - Stage LoanCore" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{565FF63F-93B1-4D73-9736-BA2766ABB153}"
+      DTS:From="Package\DFT - Stage LoanCore"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\SQL - Update watermarks" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\SQL - Get watermarks"
+          TopLeft="295.833317169713,75.3999994756778" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\SQL - Truncate staging"
+          TopLeft="304.999983335535,163.799998860955" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\DFT - Stage LoanCore"
+          TopLeft="290.833317442901,259.133331531353" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="387.016650252624,116.999999475678">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7999993852774"
+              Start="0,0"
+              End="0,39.2999993852774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2999993852774" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="384.916650389218,205.399998860955">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.7333326703974"
+              Start="0,0"
+              End="0,46.2333326703974">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.2333326703974" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\SQL - Update watermarks"
+          TopLeft="276.666651550267,365.733330790069" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="379.149984496584,300.733331531353">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.9999992587169"
+              Start="0,0"
+              End="0,57.4999992587169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.4999992587169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Stage LoanCore">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\DFT - Stage LoanCore\SRC - customer"
+          TopLeft="141.999997884035,119.999998211861" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\DFT - Stage LoanCore\DST - stg customer"
+          TopLeft="137.99999794364,228.999996587634" />
+        <EdgeLayout
+          Id="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output]"
+          TopLeft="219.799997913838,161.599998211861">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.3999983757735"
+              Start="0,0"
+              End="0,59.8999983757735">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.8999983757735" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\DFT - Stage LoanCore\SRC - branch"
+          TopLeft="344.9999948591,122.999998167157" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\DFT - Stage LoanCore\DST - stg branch"
+          TopLeft="340.999994918704,232.999996528029" />
+        <EdgeLayout
+          Id="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output1]"
+          TopLeft="417.399994888902,164.599998167157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.3999983608723"
+              Start="0,0"
+              End="0,60.8999983608723">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.8999983608723" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\DFT - Stage LoanCore\SRC - product"
+          TopLeft="544.999991878867,125.999998122454" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\DFT - Stage LoanCore\DST - stg product"
+          TopLeft="529.999992102385,230.999996557832" />
+        <EdgeLayout
+          Id="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output2]"
+          TopLeft="613.299991990626,167.599998122454">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.3999984353781"
+              Start="0,0"
+              End="0,55.8999984353781">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.8999984353781" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\DFT - Stage LoanCore\SRC - loan"
+          TopLeft="731.99998909235,122.999998167157" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DFT - Stage LoanCore\OLE DB Destination"
+          TopLeft="713.999989360571,229.999996572733" />
+        <EdgeLayout
+          Id="Package\DFT - Stage LoanCore.Paths[OLE DB Source Output3]"
+          TopLeft="797.999989226461,164.599998167157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.3999984055758"
+              Start="0,0"
+              End="0,57.8999984055758">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.8999984055758" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\SRC - customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\DST - stg customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\SRC - branch">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\DST - stg branch">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\SRC - product">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\DST - stg product">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\SRC - loan">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Stage LoanCore\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2042 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2026 8:26:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HISHAM"
+  DTS:CreatorName="HISHAM\audip"
+  DTS:DTSID="{C09AC674-7009-4828-B398-0085F46B2A23}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_Facts"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{F907D66A-16BC-41E7-84F3-C915D93FDBC8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{DB3D9DE9-2C67-4EE8-84E0-4D69A8CB76D7}"
+      DTS:ObjectName="BatchId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_payment"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{877A9FAD-BB23-4609-AB47-E8DD39B022B9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_payment"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_payment\DER - Keys and dates"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DER - Keys and dates"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input].Columns[installment_no]"
+                      cachedDataType="i4"
+                      cachedName="installment_no"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input].Columns[payment_date]"
+                      cachedDataType="dbDate"
+                      cachedName="payment_date"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input].Columns[disbursement_date]"
+                      cachedDataType="dbDate"
+                      cachedName="disbursement_date"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input].Columns[customer_key]"
+                      cachedDataType="i4"
+                      cachedName="customer_key"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output].Columns[customer_key]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output].Columns[customer_key]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(customer_key,-1)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[payment_date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[payment_date_key]"
+                      name="payment_date_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR](#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]}) * 10000 + [MONTH](#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]}) * 100 + [DAY](#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR(payment_date) * 10000 + MONTH(payment_date) * 100 + DAY(payment_date)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[due_date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[due_date_key]"
+                      name="due_date_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR]([DATEADD]("mm",#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]},#{Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]})) * 10000 + [MONTH]([DATEADD]("mm",#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]},#{Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]})) * 100 + [DAY]([DATEADD]("mm",#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]},#{Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR(DATEADD("mm",installment_no,disbursement_date)) * 10000 + MONTH(DATEADD("mm",installment_no,disbursement_date)) * 100 + DAY(DATEADD("mm",installment_no,disbursement_date))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[days_late]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[days_late]"
+                      name="days_late"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("dd",[DATEADD]("mm",#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]},#{Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]}),#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("dd",DATEADD("mm",installment_no,disbursement_date),payment_date)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[batch_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[batch_id]"
+                      name="batch_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[$Package::BatchId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[$Package::BatchId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\DER - Unknown loan"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DER - Unknown loan"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\DER - Unknown loan.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DER - Unknown loan.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[reject_reason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="200"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[reject_reason]"
+                      name="reject_reason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,200)"Unknown loan_id"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,200)"Unknown loan_id"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[batch_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[batch_id]"
+                      name="batch_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[$Package::BatchId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[$Package::BatchId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DER - Unknown loan.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\DST - fact_payment"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - fact_payment"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[fact_payment]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_payment\DST - fact_payment.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[payment_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="payment_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[installment_no]"
+                      cachedDataType="i4"
+                      cachedName="installment_no"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[amount]"
+                      cachedDataType="numeric"
+                      cachedName="amount"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[channel]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="channel"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[source_file]"
+                      cachedDataType="wstr"
+                      cachedLength="260"
+                      cachedName="source_file"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[source_file]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[loan_key]"
+                      cachedDataType="i4"
+                      cachedName="loan_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[loan_key]"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[loan_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[branch_key]"
+                      cachedDataType="i4"
+                      cachedName="branch_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[branch_key]"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[branch_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[product_key]"
+                      cachedDataType="i4"
+                      cachedName="product_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[product_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[customer_key]"
+                      cachedDataType="i4"
+                      cachedName="customer_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output].Columns[customer_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[payment_date_key]"
+                      cachedDataType="i4"
+                      cachedName="payment_date_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_date_key]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[payment_date_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[due_date_key]"
+                      cachedDataType="i4"
+                      cachedName="due_date_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[due_date_key]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[due_date_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[days_late]"
+                      cachedDataType="i4"
+                      cachedName="days_late"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[days_late]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[days_late]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output].Columns[batch_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_key]"
+                      dataType="i8"
+                      name="payment_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="payment_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[loan_key]"
+                      dataType="i4"
+                      name="loan_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[branch_key]"
+                      dataType="i4"
+                      name="branch_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
+                      dataType="i4"
+                      name="product_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[payment_date_key]"
+                      dataType="i4"
+                      name="payment_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[due_date_key]"
+                      dataType="i4"
+                      name="due_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                      dataType="i4"
+                      name="installment_no" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[days_late]"
+                      dataType="i4"
+                      name="days_late" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                      dataType="wstr"
+                      length="30"
+                      name="channel" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                      dataType="wstr"
+                      length="260"
+                      name="source_file" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      dataType="i4"
+                      name="batch_id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\DST - fact_payment.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DST - fact_payment.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DST - fact_payment.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DST - fact_payment.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\DST - payment_reject"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - payment_reject"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[etl].[payment_reject]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_payment\DST - payment_reject.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[payment_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="payment_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[loan_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="loan_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[loan_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[source_file]"
+                      cachedDataType="wstr"
+                      cachedLength="260"
+                      cachedName="source_file"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[source_file]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[reject_reason]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="reject_reason"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_reason]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[reject_reason]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      lineageId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output].Columns[batch_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[installment_no_txt]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="installment_no_txt"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no_txt]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[payment_date_txt]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="payment_date_txt"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date_txt]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[amount_txt]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="amount_txt"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount_txt]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].Columns[channel_txt]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="channel_txt"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel_txt]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_id]"
+                      dataType="i4"
+                      name="reject_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="payment_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="loan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[installment_no]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="installment_no" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[payment_date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="payment_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="amount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[channel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="channel" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[source_file]"
+                      dataType="wstr"
+                      length="260"
+                      name="source_file" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[reject_reason]"
+                      dataType="wstr"
+                      length="200"
+                      name="reject_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      dataType="i4"
+                      name="batch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input].ExternalColumns[rejected_at]"
+                      dataType="dbTimeStamp2"
+                      name="rejected_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\DST - payment_reject.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\DST - payment_reject.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\LKP - Customer SCD2"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LKP - Customer SCD2"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT customer_key, customer_id, valid_from, valid_to FROM dw.dim_customer;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM (SELECT customer_key, customer_id, valid_from, valid_to FROM dw.dim_customer) AS refTable
+WHERE refTable.customer_id = ? AND ? BETWEEN refTable.valid_from AND refTable.valid_to</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="customer_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_id" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="valid_from" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="valid_to" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[customer_id]};#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">customer_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input].Columns[payment_date]"
+                      cachedDataType="dbDate"
+                      cachedName="payment_date"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">valid_from</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output].Columns[customer_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output].Columns[customer_key]"
+                      name="customer_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">customer_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\LKP - Loan"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LKP - Loan"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT loan_id, loan_key, branch_key, product_key, disbursement_date, customer_id
+FROM etl.vw_loan_lookup;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT loan_id, loan_key, branch_key, product_key, disbursement_date, customer_id
+FROM etl.vw_loan_lookup;) [refTable]
+where [refTable].[loan_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="loan_id" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="loan_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="branch_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="product_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="disbursement_date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_id" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[loan_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_payment\LKP - Loan.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input].Columns[loan_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="loan_id"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[loan_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">loan_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[loan_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[loan_key]"
+                      name="loan_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">loan_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[branch_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[branch_key]"
+                      name="branch_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">branch_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[product_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[product_key]"
+                      name="product_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">product_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[disbursement_date]"
+                      name="disbursement_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">disbursement_date</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="12"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">customer_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_payment\SRC - Payments to load"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - Payments to load"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT payment_id, loan_id, installment_no, payment_date, amount, channel, source_file,
+       CAST(installment_no AS varchar(50))    AS installment_no_txt,
+       CONVERT(varchar(50), payment_date, 23) AS payment_date_txt,
+       CAST(amount AS varchar(50))            AS amount_txt,
+       CAST(channel AS varchar(50))           AS channel_txt
+FROM etl.vw_payment_to_load;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_payment\SRC - Payments to load.Connections[OleDbConnection]"
+                  connectionManagerID="{4F510697-738B-485D-A373-830E06E5F252}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.LoanDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_id]"
+                      length="20"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_id]"
+                      name="payment_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[loan_id]"
+                      length="12"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[loan_id]"
+                      name="loan_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[installment_no]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no]"
+                      name="installment_no"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_date]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date]"
+                      name="payment_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount]"
+                      name="amount"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[channel]"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel]"
+                      name="channel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[source_file]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[source_file]"
+                      length="260"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[source_file]"
+                      name="source_file"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[installment_no_txt]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[installment_no_txt]"
+                      name="installment_no_txt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_date_txt]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[payment_date_txt]"
+                      name="payment_date_txt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[amount_txt]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[amount_txt]"
+                      name="amount_txt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[channel_txt]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].Columns[channel_txt]"
+                      name="channel_txt"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="payment_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="loan_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[installment_no]"
+                      dataType="i4"
+                      name="installment_no" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_date]"
+                      dataType="dbDate"
+                      name="payment_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[channel]"
+                      dataType="wstr"
+                      length="30"
+                      name="channel" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[source_file]"
+                      dataType="wstr"
+                      length="260"
+                      name="source_file" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[installment_no_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="installment_no_txt" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[payment_date_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="payment_date_txt" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[amount_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="amount_txt" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output].ExternalColumns[channel_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="channel_txt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_id]"
+                      name="payment_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[loan_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[loan_id]"
+                      name="loan_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[installment_no]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[installment_no]"
+                      name="installment_no" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_date]"
+                      name="payment_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      name="amount"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[channel]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[channel]"
+                      name="channel" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[source_file]"
+                      dataType="wstr"
+                      length="260"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[source_file]"
+                      name="source_file" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[installment_no_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[installment_no_txt]"
+                      name="installment_no_txt" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_date_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[payment_date_txt]"
+                      name="payment_date_txt" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[amount_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[amount_txt]"
+                      name="amount_txt" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[channel_txt]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[channel_txt]"
+                      name="channel_txt" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[Derived Column Output]"
+              endId="Package\DFT - Load fact_payment\DST - payment_reject.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load fact_payment\DER - Unknown loan.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[Derived Column Output1]"
+              endId="Package\DFT - Load fact_payment\DST - fact_payment.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load fact_payment\DER - Keys and dates.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[Lookup Match Output]"
+              endId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[Lookup Match Output1]"
+              endId="Package\DFT - Load fact_payment\DER - Keys and dates.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT - Load fact_payment\LKP - Customer SCD2.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[Lookup No Match Output]"
+              endId="Package\DFT - Load fact_payment\DER - Unknown loan.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT - Load fact_payment\LKP - Loan.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_payment.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_payment\LKP - Loan.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_payment\SRC - Payments to load.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Build snapshot"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{410B9843-0283-4052-A567-D0D042899D0B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Build snapshot"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="EXEC etl.usp_build_loan_snapshot;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Load fact_loan"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E086158B-A1AB-402F-97F9-E174CB5D3C05}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Load fact_loan"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="EXEC etl.usp_load_fact_loan;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Reject duplicates"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{37AB9870-7C3A-4359-A2F9-4DDB26A54AD5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Reject duplicates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F510697-738B-485D-A373-830E06E5F252}"
+          SQLTask:SqlStatementSource="EXEC etl.usp_reject_duplicate_payments ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::BatchId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C50F3B65-6951-489F-B06B-5DD4ACA385BC}"
+      DTS:From="Package\SQL - Load fact_loan"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SQL - Reject duplicates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C4C2136D-F0E1-4503-A341-B1631E044BB8}"
+      DTS:From="Package\SQL - Reject duplicates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DFT - Load fact_payment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2DE7418-84C5-4153-ADF1-70D26E1ACACB}"
+      DTS:From="Package\DFT - Load fact_payment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\SQL - Build snapshot" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\SQL - Load fact_loan"
+          TopLeft="295.833317169713,91.8666660278374" />
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\SQL - Reject duplicates"
+          TopLeft="294.166650594109,174.199998788635" />
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\DFT - Load fact_payment"
+          TopLeft="289.166650867297,248.733331603673" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\SQL - Build snapshot"
+          TopLeft="294.166650594109,328.46666438255" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="385.799983881911,133.466666027837">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.7333327607976"
+              Start="0,0"
+              End="0,33.2333327607976">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.2333327607976" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="387.466650730703,215.799998788635">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.9333328150378"
+              Start="0,0"
+              End="0,25.4333328150378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.4333328150378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="384.866650730703,290.333331603673">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.1333327788776"
+              Start="0,0"
+              End="0,30.6333327788776">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6333327788776" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_payment">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\DFT - Load fact_payment\SRC - Payments to load"
+          TopLeft="318.333315940368,43.3333330319987" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\DFT - Load fact_payment\LKP - Loan"
+          TopLeft="354.166647315854,138.666665702396" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[OLE DB Source Output]"
+          TopLeft="416.249981628111,84.9333330319987">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.7333326703973"
+              Start="0,0"
+              End="0,46.2333326703973">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.2333326703973" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-27.8544140625,17.4950843039487,55.708828125,11.2431640625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="175.2,41.6"
+          Id="Package\DFT - Load fact_payment\DER - Unknown loan"
+          TopLeft="451.666641988689,250.466664924953" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[Lookup No Match Output]"
+          TopLeft="419.366647315854,180.266665702396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.899994672835,70.1999992225567"
+              Start="0,0"
+              End="119.899994672835,62.6999992225567">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.0999996112783" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.0999996112783"
+                    Point2="0,35.0999996112783"
+                    Point3="4,35.0999996112783" />
+                  <mssgle:LineSegment
+                    End="115.899994672835,35.0999996112783" />
+                  <mssgle:CubicBezierSegment
+                    Point1="115.899994672835,35.0999996112783"
+                    Point2="119.899994672835,35.0999996112783"
+                    Point3="119.899994672835,39.0999996112783" />
+                  <mssgle:LineSegment
+                    End="119.899994672835,62.6999992225567" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-18.4717409448325,40.0999996112783,156.8434765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\DFT - Load fact_payment\DST - payment_reject"
+          TopLeft="459.999974866709,347.53333091663" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[Derived Column Output]"
+          TopLeft="539.266641988689,292.066664924953">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.3333328780201,55.4666659916772"
+              Start="0,0"
+              End="10.3333328780201,47.9666659916772">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.7333329958386" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.7333329958386"
+                    Point2="0,27.7333329958386"
+                    Point3="4,27.7333329958386" />
+                  <mssgle:LineSegment
+                    End="6.33333287802009,27.7333329958386" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.33333287802009,27.7333329958386"
+                    Point2="10.3333328780201,27.7333329958386"
+                    Point3="10.3333328780201,31.7333329958386" />
+                  <mssgle:LineSegment
+                    End="10.3333328780201,47.9666659916772" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-12.98274762349,32.7333329958386,36.298828125,9.6025390625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\DFT - Load fact_payment\LKP - Customer SCD2"
+          TopLeft="224.999987706543,248.399998517434" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[Lookup Match Output]"
+          TopLeft="398.966647315854,180.266665702396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.7666596093115,68.1333328150378"
+              Start="0,0"
+              End="-82.7666596093115,60.6333328150378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.7488482737608" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.7488482737608"
+                    Point2="0,27.7488482737608"
+                    Point3="-4,27.7488482737608" />
+                  <mssgle:LineSegment
+                    End="-78.7666596093115,27.7488482737608" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.7666596093115,27.7488482737608"
+                    Point2="-82.7666596093115,27.7488482737608"
+                    Point3="-82.7666596093115,31.7488482737608" />
+                  <mssgle:LineSegment
+                    End="-82.7666596093115,60.6333328150378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-121.895068085906,32.7488482737608,161.0234765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\DFT - Load fact_payment\DER - Keys and dates"
+          TopLeft="219.999987979731,338.533331223991" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[Lookup Match Output1]"
+          TopLeft="313.299987843137,289.999998517434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.5333327065573"
+              Start="0,0"
+              End="0,41.0333327065573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.0333327065573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-80.51173828125,14.7119788532787,161.0234765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DFT - Load fact_payment\DST - fact_payment"
+          TopLeft="226.666654282146,426.933330609269" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_payment.Paths[Derived Column Output1]"
+          TopLeft="311.133321130938,380.133331223991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7999993852774"
+              Start="0,0"
+              End="0,39.2999993852774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2999993852774" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.11953125,14.0430660988887,50.2390625,11.2138671875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment\SRC - Payments to load">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment\LKP - Loan">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment\DST - payment_reject">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment\LKP - Customer SCD2">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">true</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment\DST - fact_payment">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
